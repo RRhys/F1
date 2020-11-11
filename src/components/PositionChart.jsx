@@ -41,7 +41,7 @@ function PositionChart({ data }) {
   useEffect(() => {
     if (!data) return;
 
-    const newSeries = [...series];
+    const newSeries = [];
     newSeries.map((series) => (series.data = []));
     data
       .filter((lap) => parseInt(lap.number) <= parseInt(currentLap))
