@@ -3,7 +3,7 @@ import { getLapTimes, getRaceResults } from "../api/race";
 import { useQuery } from "react-query";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import LapChart from "../components/LapChart";
+// import LapChart from "../components/LapChart";
 import PositionChart from "../components/PositionChart";
 dayjs.extend(advancedFormat);
 
