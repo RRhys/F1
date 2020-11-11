@@ -1,0 +1,14 @@
+export const mercedes = "#00D2BE";
+export const ferrari = "#DC0000";
+export const red_bull = "#1E41FF";
+export const renault = "#FFF500";
+export const haas = "#F0D787";
+export const racing_point = "#F596C8";
+export const alphatauri = "#C8C8C8";
+export const mclaren = "#FF8700";
+export const alfa = "#9B0000";
+export const williams = "#0082FA";
+export const force_india = "#F596C8";
+export const sauber = "#9B0000";
+export const toro_rosso = "#0032FF";
+export const manor = "#ed1b24";
