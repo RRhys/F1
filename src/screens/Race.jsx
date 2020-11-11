@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import LapChart from "../components/LapChart";
+import PositionChart from "../components/PositionChart";
 dayjs.extend(advancedFormat);
 
 const getChevron = ({ position, grid, status }) => {
@@ -45,56 +46,77 @@ function Season() {
     { staleTime: 60 * 1000 }
   );
 
+  const chartLapData = lapTimes
+    ? lapTimes.map((lap) => {
+        lap.Timings.map((time) => {
+          const result = data.Results.find(
+            (result) => result.Driver.driverId === time.driverId
+          );
+          time.Driver = result.Driver;
+          time.Constructor = result.Constructor;
+          return time;
+        });
+        return lap;
+      })
+    : [];
+
   return (
-    <div className="container">
-      <h2>
-        {season} {data ? data.raceName : ""} - Race {race}
-      </h2>
-      <h3 className="text-muted">
-        {data && dayjs(data.date).format("Do MMMM YYYY")}
-      </h3>
-      <LapChart data={lapTimes} />
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Position</th>
-            <th>Driver</th>
-            <th>Constructor</th>
-            <th>Time</th>
-            <th>Starting Grid</th>
-            <th>Status</th>
-            <th>Points</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data.Results.map((result) => (
-              <tr
-                key={result.position}
-                className={
-                  result.status === "Finished" ? "" : "bg-light text-muted"
-                }
-              >
-                <td>
-                  {result.position} {getChevron(result)} {}
-                </td>
-                <td>
-                  {result.Driver.givenName} {result.Driver.familyName}
-                  <span className="pl-1 font-italic font-weight-light">
-                    {result.number}
-                  </span>
-                </td>
-                <td>{result.Constructor.name}</td>
-                <td>{result.Time ? result.Time.time : ""}</td>
-                <td>{result.grid}</td>
-                <td>{result.status}</td>
-                <td>{result.points}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="container">
+        <h2>
+          {season} {data ? data.raceName : ""} - Race {race}
+        </h2>
+        <h3 className="text-muted">
+          {data && dayjs(data.date).format("Do MMMM YYYY")}
+        </h3>
+      </div>
+      <div className="container-fluid">
+        <PositionChart data={chartLapData} />
+        {/* <LapChart data={lapTimes} /> */}
+      </div>
+      <div className="container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Driver</th>
+              <th>Constructor</th>
+              <th>Time</th>
+              <th>Starting Grid</th>
+              <th>Status</th>
+              <th>Points</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              data.Results.map((result) => (
+                <tr
+                  key={result.position}
+                  className={
+                    result.status === "Finished" ? "" : "bg-light text-muted"
+                  }
+                >
+                  <td>
+                    {result.position} {getChevron(result)}
+                  </td>
+                  <td>
+                    {result.Driver.givenName} {result.Driver.familyName}
+                    <span className="pl-1 font-italic font-weight-light">
+                      {result.number}
+                    </span>
+                  </td>
+                  <td>{result.Constructor.name}</td>
+                  <td>{result.Time ? result.Time.time : ""}</td>
+                  <td>{result.grid}</td>
+                  <td>{result.status}</td>
+                  <td>{result.points}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
