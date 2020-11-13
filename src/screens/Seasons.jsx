@@ -10,22 +10,26 @@ function Seasons() {
   return (
     <div className="container">
       <h2>Seasons</h2>
-      <table className="table table-sm">
-        <thead>
-          <tr>
-            <th>Year</th>
-          </tr>
-        </thead>
+      <div className="d-flex flex-row flex-wrap">
         {data
           ? seasons.map((season) => (
-              <tr key={season.season}>
-                <td>
-                  <Link to={`/season/${season.season}`}>{season.season}</Link>
-                </td>
-              </tr>
+              <div
+                key={season.season}
+                className="p-3 col-lg-3 col-md-6 col-sm-12"
+              >
+                <div className="card shadow-sm">
+                  <div className="card-body pl-0 pb-1 pt-5 text-right">
+                    <span className="display-4">
+                      <Link to={`/season/${season.season}`}>
+                        {season.season}
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+              </div>
             ))
           : null}
-      </table>
+      </div>
     </div>
   );
 }
