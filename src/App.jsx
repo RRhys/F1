@@ -7,6 +7,7 @@ import Seasons from "./screens/Seasons";
 import Season from "./screens/Season";
 import Race from "./screens/Race";
 import Navbar from "./components/Navbar";
+import "./custom.scss";
 
 const queryCache = new QueryCache();
 

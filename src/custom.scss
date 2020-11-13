@@ -1,0 +1,24 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Goldman";
+}
+
+body {
+  font-family: "Goldman" !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+$primary: #ff1801;
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
