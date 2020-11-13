@@ -15,7 +15,7 @@ function Season() {
   return (
     <div className="container">
       <h2>{season} Season</h2>
-      <table className="table table-sm">
+      <table className="table">
         <thead>
           <tr>
             <th>Race</th>
