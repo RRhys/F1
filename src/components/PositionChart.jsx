@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Chart from "react-apexcharts";
 import * as colors from "../styles/colors";
+import Controls from "./Controls";
 
 const getColours = (series) => {
   if (series.length === 0) return ["white"];
@@ -25,6 +26,9 @@ function PositionChart({ data }) {
         enabled: true,
       },
       background: "#fff",
+      toolbar: {
+        show: false,
+      },
     },
     colors: constructorColours,
     yaxis: {
@@ -85,42 +89,14 @@ function PositionChart({ data }) {
   return (
     <>
       <Chart options={options} series={series} type="line" height={600} />
-      <div className="d-flex flex-row justify-content-center mb-3">
-        <button
-          className="btn btn-sm btn-dark mr-1"
-          onClick={() => setCurrentLap(1)}
-        >
-          <i className="fas fa-fast-backward"></i>
-        </button>
-        <button
-          className="btn btn-sm btn-dark mr-1"
-          onClick={() => handleLapChange(-1)}
-        >
-          <i className="fas fa-backward"></i>
-        </button>
-        <button
-          className="btn btn-dark btn-sm mr-1"
-          onClick={() => setPlaying(!playing)}
-        >
-          {playing ? (
-            <i className="fas fa-pause" />
-          ) : (
-            <i className="fas fa-play" />
-          )}
-        </button>
-        <button
-          className="btn btn-sm btn-dark mr-1"
-          onClick={() => handleLapChange(1)}
-        >
-          <i className="fas fa-forward"></i>
-        </button>
-        <button
-          className="btn btn-sm btn-dark mr-1"
-          onClick={() => setCurrentLap(totalLaps)}
-        >
-          <i className="fas fa-fast-forward"></i>
-        </button>
-      </div>
+      <Controls
+        playing={playing}
+        handlePlay={() => setPlaying(!playing)}
+        handleFirstLap={() => setCurrentLap(1)}
+        handleBackLap={() => handleLapChange(-1)}
+        handleForwardLap={() => handleLapChange(1)}
+        handleLastLap={() => setCurrentLap(totalLaps)}
+      />
     </>
   );
 }
