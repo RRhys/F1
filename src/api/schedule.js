@@ -5,4 +5,11 @@ function getSchedule(season) {
     .then((data) => data.MRData.RaceTable.Races);
 }
 
-export { getSchedule };
+function getCurrent() {
+  const url = `http://ergast.com/api/f1/current.json`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => data.MRData.RaceTable.Races);
+}
+
+export { getSchedule, getCurrent };
