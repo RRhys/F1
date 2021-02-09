@@ -6,7 +6,7 @@ function getSchedule(season) {
 }
 
 function getCurrent() {
-  const url = `http://ergast.com/api/f1/current.json`;
+  const url = `https://ergast.com/api/f1/current.json`;
   return fetch(url)
     .then((response) => response.json())
     .then((data) => data.MRData.RaceTable.Races);

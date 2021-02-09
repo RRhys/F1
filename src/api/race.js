@@ -6,7 +6,7 @@ function getRaceResults(season, race) {
 }
 
 function lastRace() {
-  const url = `http://ergast.com/api/f1/current/last/results.json`;
+  const url = `https://ergast.com/api/f1/current/last/results.json`;
   return fetch(url)
     .then((response) => response.json())
     .then((data) => data.MRData.RaceTable.Races[0]);
